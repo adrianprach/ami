@@ -19,7 +19,6 @@ const c2Image = require("@/assets/avatar/a3.jpg");
 
 export default function NewGameScreen() {
   const game = useValue(game$);
-  console.log({ game });
   return (
     <ScopedTheme theme={game?.character ?? "dark"}>
       <SafeAreaView>
@@ -93,7 +92,7 @@ export default function NewGameScreen() {
             <ThemedText className="px-8">Make this story your own</ThemedText>
             <View className="mt-4 flex flex-row gap-1 justify-around">
               <Character
-              imageMaxHeight={200}
+                imageMaxHeight={200}
                 name={game.name ? game.name : game.character!}
                 image={game.character == "jane" ? c1Image : c2Image}
                 theme="oscar"
@@ -106,6 +105,7 @@ export default function NewGameScreen() {
                   Name:
                 </ThemedText>
                 <TextInput
+                defaultValue={game.name}
                   placeholder="Enter name..."
                   onChangeText={game$.name.set}
                 />
