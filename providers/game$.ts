@@ -8,6 +8,7 @@ interface GameProps {
   name: string;
   gender?: Gender;
   step: "character-selection" | "customise-character";
+  current_stage_id?: string;
 }
 
 export const game$ = observable<GameProps>({
@@ -15,6 +16,7 @@ export const game$ = observable<GameProps>({
   gender: undefined,
   name: "",
   step: "character-selection",
+  current_stage_id: "STG_00_AWAKENING"
 });
 
 syncObservable(game$, {

@@ -8,7 +8,7 @@ import { ScopedTheme, useUniwind } from "uniwind";
 
 export default function TabLayout() {
   const { theme, hasAdaptiveThemes } = useUniwind();
-  console.log({theme})
+  console.log({ theme });
   return (
     <ScopedTheme theme={theme}>
       <Tabs
@@ -36,6 +36,17 @@ export default function TabLayout() {
             ),
           }}
         />
+
+        <Tabs.Screen
+          name="continue"
+          options={{
+            title: "Continue",
+            tabBarIcon: ({ color }) => (
+              <IconSymbol size={28} name="paperplane.fill" color={color} />
+            ),
+          }}
+        />
+
         <Tabs.Screen
           name="stage-selection"
           options={{

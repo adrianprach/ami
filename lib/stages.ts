@@ -1,6 +1,10 @@
 import stagesJson from "@/constants/stages/stages.json";
 
-import type { StageDefinition, StageNode, StagesMap } from "@/interfaces/stages";
+import type {
+  StageDefinition,
+  StageNode,
+  StagesMap,
+} from "@/interfaces/stages";
 
 const stages = stagesJson as StagesMap;
 
@@ -28,4 +32,8 @@ export function getStageNodes(stageId: string): StageNode[] {
 
 export function getStageIds(): string[] {
   return Object.keys(stages);
+}
+
+export function getFirstStageId(): string {
+  return getStageIds()[0];
 }

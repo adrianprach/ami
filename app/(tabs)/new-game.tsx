@@ -8,19 +8,22 @@ import { HorizontalSteps, Step } from "@/components/ui/horizontal-steps";
 import TextInput from "@/components/ui/text-input";
 import { CHARACTERS, GENDERS } from "@/constants/game";
 import { Fonts } from "@/constants/theme";
-import { getStageIds, getStages } from "@/lib/stages";
+import { getFirstStageId, getStageIds, getStages } from "@/lib/stages";
 import { game$ } from "@/providers/game$";
 import { useValue } from "@legendapp/state/react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScopedTheme } from "uniwind";
+import { useRouter } from "expo-router";
 
 const c1Image = require("@/assets/avatar/a1.jpg");
 const c2Image = require("@/assets/avatar/a3.jpg");
 
 export default function NewGameScreen() {
-  const stages = getStages()
-  const stageNodes = getStageIds()
-  console.log({stages, stageNodes})
+  const stages = getStages();
+  const stageNodes = getStageIds();
+  console.log({ stages, stageNodes });
+  const router = useRouter();
+
   const game = useValue(game$);
   return (
     <ScopedTheme theme={game?.character ?? "dark"}>
@@ -108,7 +111,7 @@ export default function NewGameScreen() {
                   Name:
                 </ThemedText>
                 <TextInput
-                defaultValue={game.name}
+                  defaultValue={game.name}
                   placeholder="Enter name..."
                   onChangeText={game$.name.set}
                 />
@@ -135,7 +138,15 @@ export default function NewGameScreen() {
                     Female
                   </ButtonGroupItem>
                 </ButtonGroup>
-                <Button className="my-2">CONTINUE</Button>
+                <Button
+                  className="my-2"
+                  onPress={() => {
+                    game$.current_stage_id.set(getFirstStageId());
+                    router.navigate("/continue")
+                  }}
+                >
+                  CONTINUE
+                </Button>
               </View>
             </View>
           </View>
