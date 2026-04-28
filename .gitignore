@@ -44,3 +44,5 @@ app-example
 .claude/skills/uniwind
 .pi/skills/uniwind
 .qwen/skills/uniwind
+
+/constants/stages/
