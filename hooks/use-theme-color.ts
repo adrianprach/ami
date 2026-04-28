@@ -5,17 +5,20 @@
 
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useUniwind } from 'uniwind';
 
 export function useThemeColor(
-  props: { light?: string; dark?: string },
-  colorName: keyof typeof Colors.light & keyof typeof Colors.dark
+  props: { light?: string; dark?: string; jane?: string; oscar?: string },
+  colorName: keyof typeof Colors.light & keyof typeof Colors.dark & keyof typeof Colors.jane & keyof typeof Colors.oscar
 ) {
-  const theme = useColorScheme() ?? 'light';
-  const colorFromProps = props[theme];
+  const colorScheme = useColorScheme() ?? 'light';
+  const { theme } = useUniwind();
+  const resolvedTheme = theme && theme in Colors ? theme : colorScheme;
+  const colorFromProps = props[resolvedTheme as keyof typeof props];
 
   if (colorFromProps) {
     return colorFromProps;
   } else {
-    return Colors[theme][colorName];
+    return Colors[resolvedTheme as keyof typeof Colors][colorName];
   }
 }

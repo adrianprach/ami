@@ -4,3 +4,85 @@
 /* Tailwind scans from the CSS file's directory (`app/`). Include siblings so
    `className` utilities used under `components/` are compiled. */
 @source '../components';
+
+/*
+ * Game themes: `jane` (warm) and `oscar` (cool).
+ * Uniwind always registers `light` and `dark` in Metro; those blocks mirror
+ * jane/oscar so every registered theme exposes the same variables. Use
+ * `Uniwind.setTheme('jane' | 'oscar')` — do not rely on system light/dark for UI.
+ */
+@layer theme {
+  :root {
+    /* Jane — warm paper / adventure */
+    @variant jane {
+      --color-background: #f5f0e8;
+      --color-background-secondary: #ebe3d7;
+      --color-foreground: #1c1917;
+      --color-foreground-secondary: #57534e;
+      --color-muted: #a8a29e;
+      --color-card: #faf6f0;
+      --color-border: #d6cfc2;
+      --color-border-subtle: #ebe3d7;
+      --color-primary: #c45c26;
+      --color-primary-hover: #a34a1e;
+      --color-accent: #b45309;
+      --color-danger: #dc2626;
+      --color-success: #16a34a;
+      --color-warning: #ca8a04;
+    }
+
+    /* Oscar — cool night / HUD */
+    @variant oscar {
+      --color-background: #090d12;
+      --color-background-secondary: #0f1722;
+      --color-foreground: #ecf2fb;
+      --color-foreground-secondary: #9aabc2;
+      --color-muted: #5c6f89;
+      --color-card: #111926;
+      --color-border: #233247;
+      --color-border-subtle: #172334;
+      --color-primary: #38bdf8;
+      --color-primary-hover: #0ea5e9;
+      --color-accent: #a78bfa;
+      --color-danger: #f87171;
+      --color-success: #4ade80;
+      --color-warning: #fbbf24;
+    }
+
+    /* Internal: same tokens as jane (Uniwind requires light/dark variants) */
+    @variant light {
+      --color-background: #f5f0e8;
+      --color-background-secondary: #ebe3d7;
+      --color-foreground: #1c1917;
+      --color-foreground-secondary: #57534e;
+      --color-muted: #a8a29e;
+      --color-card: #faf6f0;
+      --color-border: #d6cfc2;
+      --color-border-subtle: #ebe3d7;
+      --color-primary: #c45c26;
+      --color-primary-hover: #a34a1e;
+      --color-accent: #b45309;
+      --color-danger: #dc2626;
+      --color-success: #16a34a;
+      --color-warning: #ca8a04;
+    }
+
+    /* Internal: same tokens as oscar */
+    @variant dark {
+      --color-background: #090d12;
+      --color-background-secondary: #0f1722;
+      --color-foreground: #ecf2fb;
+      --color-foreground-secondary: #9aabc2;
+      --color-muted: #5c6f89;
+      --color-card: #111926;
+      --color-border: #233247;
+      --color-border-subtle: #172334;
+      --color-primary: #38bdf8;
+      --color-primary-hover: #0ea5e9;
+      --color-accent: #a78bfa;
+      --color-danger: #f87171;
+      --color-success: #4ade80;
+      --color-warning: #fbbf24;
+    }
+  }
+}

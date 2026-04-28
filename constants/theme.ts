@@ -25,6 +25,22 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
+  jane: {
+    text: '#1c1917',
+    background: '#f5f0e8',
+    tint: '#c45c26',
+    icon: '#57534e',
+    tabIconDefault: '#a8a29e',
+    tabIconSelected: '#c45c26',
+  },
+  oscar: {
+    text: '#e7ecf3',
+    background: '#0f1419',
+    tint: '#38bdf8',
+    icon: '#94a3b8',
+    tabIconDefault: '#64748b',
+    tabIconSelected: '#38bdf8',
+  },
 };
 
 export const Fonts = Platform.select({

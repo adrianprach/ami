@@ -5,10 +5,9 @@ const config = getDefaultConfig(__dirname);
 
 // your metro modifications
 
-module.exports = withUniwindConfig(config, {  
-  // relative path to your global.css file (from previous step)
+module.exports = withUniwindConfig(config, {
   cssEntryFile: './app/global.css',
-  // (optional) path where we gonna auto-generate typings
-  // defaults to project's root
-  dtsFile: './app/uniwind-types.d.ts'
+  dtsFile: './app/uniwind-types.d.ts',
+  /** Registered with Uniwind so `jane:` / `oscar:` variants and `setTheme()` work */
+  extraThemes: ['jane', 'oscar'],
 });

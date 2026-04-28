@@ -1,60 +1,41 @@
-import { StyleSheet, Text, type TextProps } from 'react-native';
+import { Text, type TextProps } from "react-native";
+import { ScopedTheme } from "uniwind";
 
-import { useThemeColor } from '@/hooks/use-theme-color';
+import type { AppTheme } from "@/constants/game-theme";
+import { cn } from "@/utils/styling";
 
 export type ThemedTextProps = TextProps & {
-  lightColor?: string;
-  darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  theme?: AppTheme;
+  type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
 };
 
 export function ThemedText({
   style,
-  lightColor,
-  darkColor,
-  type = 'default',
+  theme,
+  type = "default",
+  className,
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const classNameByType = {
+    default: "p-2 text-base leading-6 text-foreground",
+    title:
+      "p-8 text-3xl leading-8 font-bold text-foreground bg-background-secondary",
+    defaultSemiBold: "p-2 text-base leading-6 font-semibold text-foreground",
+    subtitle: "p-2 text-xl font-bold text-foreground",
+    link: "p-2 text-base leading-[30px] text-primary",
+  } satisfies Record<NonNullable<ThemedTextProps["type"]>, string>;
 
-  return (
+  const text = (
     <Text
-      style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
-      ]}
+      className={cn(classNameByType[type], className)}
+      style={style}
       {...rest}
     />
   );
-}
 
-const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: '600',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
-  },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  link: {
-    lineHeight: 30,
-    fontSize: 16,
-    color: '#0a7ea4',
-  },
-});
+  if (!theme) {
+    return text;
+  }
+
+  return <ScopedTheme theme={theme}>{text}</ScopedTheme>;
+}
