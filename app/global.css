@@ -1,2 +1,6 @@
 @import 'tailwindcss';
 @import 'uniwind';
+
+/* Tailwind scans from the CSS file's directory (`app/`). Include siblings so
+   `className` utilities used under `components/` are compiled. */
+@source '../components';
