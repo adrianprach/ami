@@ -1,23 +1,26 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 import Character from "@/components/character-selections/character";
 import { ThemedText } from "@/components/themed-text";
-import { Fonts } from "@/constants/theme";
-import { useValue } from "@legendapp/state/react";
-import { game$ } from "@/providers/game$";
-import { CHARACTERS, GENDERS } from "@/constants/game";
 import Button from "@/components/ui/button";
-import { ScopedTheme } from "uniwind";
-import TextInput, { LabeledTextInput } from "@/components/ui/text-input";
-import { HorizontalSteps, Step } from "@/components/ui/horizontal-steps";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ButtonGroup, ButtonGroupItem } from "@/components/ui/button-group";
+import { HorizontalSteps, Step } from "@/components/ui/horizontal-steps";
+import TextInput from "@/components/ui/text-input";
+import { CHARACTERS, GENDERS } from "@/constants/game";
+import { Fonts } from "@/constants/theme";
+import { getStageIds, getStages } from "@/lib/stages";
+import { game$ } from "@/providers/game$";
+import { useValue } from "@legendapp/state/react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ScopedTheme } from "uniwind";
 
-const bgImage = require("@/assets/background/bg-1.jpg");
 const c1Image = require("@/assets/avatar/a1.jpg");
 const c2Image = require("@/assets/avatar/a3.jpg");
 
 export default function NewGameScreen() {
+  const stages = getStages()
+  const stageNodes = getStageIds()
+  console.log({stages, stageNodes})
   const game = useValue(game$);
   return (
     <ScopedTheme theme={game?.character ?? "dark"}>

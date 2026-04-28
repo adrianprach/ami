@@ -1,0 +1,186 @@
+{
+  "STG_00_AWAKENING": {
+    "stage_id": "STG_00_AWAKENING",
+    "metadata": {
+      "theme": "Sensory Deprivation",
+      "difficulty": 1
+    },
+    "nodes": [
+      {
+        "id": "start",
+        "text": "System check. Vision: Blurred. Pulse: Erratic. You are a ghost in a machine made of meat.",
+        "choices": [
+          {
+            "text": "Open your eyes.",
+            "next": "white_room",
+            "impact": {
+              "dissonance": 5
+            }
+          }
+        ]
+      },
+      {
+        "id": "white_room",
+        "text": "A sterile room. A doctor sits across from you, his face a featureless  blur of 'Importance'. He asks: 'Do you know who you are?'\n",
+        "choices": [
+          {
+            "text": "Lie: 'I am [REDACTED].'",
+            "next": "calibration_end",
+            "impact": {
+              "identity": -5
+            }
+          },
+          {
+            "text": "Truth: 'I am... not him.'",
+            "next": "calibration_failure",
+            "impact": {
+              "dissonance": 20
+            }
+          }
+        ]
+      },
+      {
+        "id": "calibration_failure",
+        "text": "The room tilts. High-pitched ringing fills your ears. The body is rejecting the truth.",
+        "next": "calibration_end"
+      },
+      {
+        "id": "calibration_end",
+        "text": "The doctor nods, writing on a clipboard. 'Stability at 40%. Discharge him.'",
+        "next_stage": "STG_01_KITCHEN"
+      }
+    ],
+    "__source": "constants/stages/00_prologue.yaml"
+  },
+  "STG_01_THE_KITCHEN": {
+    "stage_id": "STG_01_THE_KITCHEN",
+    "stage_name": "The Morning After",
+    "description": "Escape the house without revealing your identity.",
+    "nodes": [
+      {
+        "id": "kitchen_01_entry",
+        "text": "The smell of burnt toast fills the air. 'You're late,' she says,  not looking up from the stove.\n",
+        "choices": [
+          {
+            "text": "Apologize: 'Sorry, I didn't sleep well.'",
+            "next": "kitchen_02_flavor"
+          },
+          {
+            "text": "Stay silent and sit down.",
+            "next": "kitchen_02_flavor"
+          }
+        ]
+      },
+      {
+        "id": "kitchen_02_flavor",
+        "text": "She sets a plate in front of you. It's eggs. You hate eggs,  but this body apparently loves them.\n",
+        "choices": [
+          {
+            "text": "Eat them quickly.",
+            "next": "kitchen_03_convergence",
+            "set_flags": [
+              "ate_eggs"
+            ],
+            "impact": {
+              "identity": -2
+            }
+          },
+          {
+            "text": "Push the plate away.",
+            "next": "kitchen_03_convergence",
+            "impact": {
+              "suspicion": 10
+            }
+          }
+        ]
+      },
+      {
+        "id": "kitchen_03_convergence",
+        "text": "Before you can speak, the landline rings. She answers,  her face turning pale. 'It's the hospital,' she whispers.\n",
+        "next": "kitchen_04_hub"
+      },
+      {
+        "id": "kitchen_04_hub",
+        "text": "She's distracted by the call. This is your chance to look around.",
+        "choices": [
+          {
+            "text": "[Loop] Search her purse on the counter.",
+            "next": "kitchen_05_loop_search"
+          },
+          {
+            "text": "[Loop] Use Memory Leak on the hospital name.",
+            "next": "kitchen_06_loop_leak"
+          },
+          {
+            "text": "Just leave the house now.",
+            "next": "kitchen_07_exit_decision"
+          }
+        ]
+      },
+      {
+        "id": "kitchen_05_loop_search",
+        "text": "You find a prescription for heavy sedatives.  They aren't for her... they're for 'You'.\n",
+        "set_flags": [
+          "found_sedatives"
+        ],
+        "next": "kitchen_04_hub"
+      },
+      {
+        "id": "kitchen_06_loop_leak",
+        "text": "The name 'St. Jude' triggers a flash: a white room,  a needle, and a signed contract in your old handwriting.\n",
+        "impact": {
+          "identity": -15,
+          "dissonance": 10
+        },
+        "set_flags": [
+          "knows_about_contract"
+        ],
+        "next": "kitchen_04_hub"
+      },
+      {
+        "id": "kitchen_07_exit_decision",
+        "text": "She hangs up and looks at you with watery eyes.  'They found him. The man who... the man you replaced.'\n",
+        "choices": [
+          {
+            "text": "Offer to go with her to the hospital.",
+            "next": "kitchen_08_path_a",
+            "set_flags": [
+              "path_empathy"
+            ]
+          },
+          {
+            "text": "Make an excuse and run for the door.",
+            "next": "kitchen_08_path_b",
+            "set_flags": [
+              "path_fugitive"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "kitchen_08_path_a",
+        "text": "She hugs you. It feels warm, but nauseating.  You are becoming the lie she needs.\n",
+        "impact": {
+          "identity": -10,
+          "suspicion": -15
+        },
+        "next": "kitchen_09_stage_end"
+      },
+      {
+        "id": "kitchen_08_path_b",
+        "text": "You bolt out the door. The cold morning air hits your  lungs like glass. You're a ghost in a stolen body.\n",
+        "impact": {
+          "suspicion": 20,
+          "dissonance": 5
+        },
+        "next": "kitchen_09_stage_end"
+      },
+      {
+        "id": "kitchen_09_stage_end",
+        "text": "The screen fades to black as the system synchronizes.",
+        "next": "STAGE_02_STREETS"
+      }
+    ],
+    "__source": "constants/stages/01_kitchen.yaml"
+  }
+}
