@@ -19,7 +19,7 @@ export function ThemedText({
   const classNameByType = {
     default: "p-2 text-base leading-6 text-foreground",
     title:
-      "p-8 text-3xl leading-8 font-bold text-foreground bg-background-secondary",
+      "p-4 sm:p-8 text-2xl sm:text-3xl leading-8 font-bold text-foreground bg-background-secondary",
     defaultSemiBold: "p-2 text-base leading-6 font-semibold text-foreground",
     subtitle: "p-2 text-xl font-bold text-foreground",
     link: "p-2 text-base leading-[30px] text-primary",

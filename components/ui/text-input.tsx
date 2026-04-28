@@ -20,7 +20,7 @@ export default function TextInput({
   const content = (
     <RNTextInput
       className={cn(
-        "border border-border bg-card text-foreground rounded-lg px-4 py-3 text-base",
+        "w-full border border-border bg-card text-foreground rounded-lg px-4 py-3 text-base",
         className
       )}
       cursorColorClassName={cursorColorClassName}
@@ -37,4 +37,3 @@ export default function TextInput({
 
   return <ScopedTheme theme={theme}>{content}</ScopedTheme>;
 }
-

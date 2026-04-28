@@ -9,9 +9,17 @@ interface Props {
   theme?: AppTheme;
   isSelected?: boolean;
   onPress?: () => void;
+  imageMaxHeight?: number;
 }
 
-export default function Character({ name, image, theme, isSelected, onPress }: Props) {
+export default function Character({
+  name,
+  image,
+  theme,
+  isSelected,
+  onPress,
+  imageMaxHeight = 250,
+}: Props) {
   const content = (
     <Pressable
       data-selected={isSelected}
@@ -20,7 +28,7 @@ export default function Character({ name, image, theme, isSelected, onPress }: P
     >
       <Image
         source={image}
-        style={styles.characterImage}
+        style={[styles.characterImage, { maxHeight: imageMaxHeight }]}
         className="rounded-xl"
       />
       <Text className="bg-background-secondary/80 rounded-xl mt-2 p-2 text-lg text-foreground text-center group-data-[selected=true]:text-primary group-data-[selected=true]:font-semibold">
